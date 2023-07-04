@@ -23,6 +23,13 @@ app.use('/api', notesRouter)
 
 // INITIALIZE OUR DATABASE OBJECT
 const db = require(__dirname +'/db')
+
+app.use(express.static(path.join(__dirname, "../build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../build/index.html"));
+})
+
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 
